@@ -1,0 +1,70 @@
+[gd_scene load_steps=8 format=3 uid="uid://bvu7gmwspadc1"]
+
+[ext_resource type="Script" path="res://character_body_2d.gd" id="1_is5hr"]
+[ext_resource type="Texture2D" uid="uid://cr4ehlbyqswac" path="res://kenney_robot-pack/PNG/Side view/robot_greenDrive1.png" id="2_i080o"]
+[ext_resource type="Texture2D" uid="uid://cibpqom8q04hx" path="res://kenney_robot-pack/PNG/Side view/robot_greenDrive2.png" id="3_ulgwj"]
+[ext_resource type="Texture2D" uid="uid://bcyykxpovgq61" path="res://kenney_robot-pack/PNG/Side view/robot_greenJump.png" id="4_db3ct"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_efhbi"]
+size = Vector2(493, 80)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ens25"]
+size = Vector2(75.5, 57)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_867sq"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_i080o")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_ulgwj")
+}],
+"loop": true,
+"name": &"drive",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 5.0,
+"texture": ExtResource("4_db3ct")
+}],
+"loop": true,
+"name": &"jump",
+"speed": 5.0
+}]
+
+[node name="Node2D" type="Node2D"]
+
+[node name="Camera2D" type="Camera2D" parent="."]
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(-1.5, 60)
+shape = SubResource("RectangleShape2D_efhbi")
+
+[node name="ColorRect" type="ColorRect" parent="StaticBody2D"]
+offset_left = -250.0
+offset_top = 19.0
+offset_right = 246.0
+offset_bottom = 102.0
+
+[node name="CharacterBody2D" type="CharacterBody2D" parent="."]
+script = ExtResource("1_is5hr")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D"]
+position = Vector2(-123.75, -109.5)
+shape = SubResource("RectangleShape2D_ens25")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="CharacterBody2D"]
+position = Vector2(-123, -110)
+scale = Vector2(0.493671, 0.491667)
+sprite_frames = SubResource("SpriteFrames_867sq")
+animation = &"jump"
+
+[node name="Area2D" type="Area2D" parent="."]
